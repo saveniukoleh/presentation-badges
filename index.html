@@ -215,6 +215,7 @@
                           mesh1 = new THREE.Mesh(geometry1, material1);
                           // Поворачиваем плоскость
                           mesh1.rotation.x = -Math.PI / 2;
+                          console.log(mesh1)
                           // Добавляем плоскость в контейнер
                           markerRoots[i].add(mesh1);
                       }
@@ -363,7 +364,6 @@
 
       // Рендерим сцену на каждый кадр
       function render() {
-          console.log(renderer.getSize(),arToolkitContext.arController.canvas)
           renderer.render(scene, camera);
       }
 
