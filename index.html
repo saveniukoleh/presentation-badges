@@ -71,7 +71,7 @@
                 alpha: true
             });
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-            renderer.setSize(840, 680);
+            renderer.setSize(1440, 1080);
             renderer.domElement.style.position = 'absolute'
             renderer.domElement.style.top = '0px'
             renderer.domElement.style.left = '0px'
@@ -110,8 +110,8 @@
                 detectionMode: 'mono_and_matrix',
                 matrixCodeType: "3x3",
                 maxDetectionRate: 60,
-                canvasWidth: 840,
-                canvasHeight: 680
+                canvasWidth: 1440,
+                canvasHeight: 1080
             });
 
             // Обновляем матрицу проекции камеры после окончания инициализации
@@ -363,6 +363,7 @@
 
       // Рендерим сцену на каждый кадр
       function render() {
+          console.log(renderer.getSize(),arToolkitContext.arController.canvas)
           renderer.render(scene, camera);
       }
 
