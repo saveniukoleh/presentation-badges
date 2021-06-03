@@ -167,20 +167,12 @@
                 });
 
             function initScene() {
-                patternNames.push('');
-                patternBarcode.push(0);
-                modes.push('')
-                modelFiles.push('')
-                imageFiles.push('')
-                videoFiles.push('')
-                audioFiles.push('')
-                repeatOptions.push('false')
-            for (let i = 1; i< 64; i++) {
+            for (let i = 0; i< 64; i++) {
                 patternNames.push('');
                 patternBarcode.push(i);
-                i < 44 ? modes.push('image') : modes.push('')
+                modes.push('image')
                 modelFiles.push('')
-                i < 44 ? imageFiles.push(`badges/${i}.jpg`) : imageFiles.push('')
+                imageFiles.push(`badges/${i}.png`)
                 videoFiles.push('')
                 audioFiles.push('')
                 repeatOptions.push('false')
@@ -242,6 +234,7 @@
                       if (imageFiles[i]) {
                           // Объявляем плоскость под изображение
                           let geometry1 = new THREE.PlaneBufferGeometry(3.5*1.5,2*1.5, 4, 4);
+                        //   let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4, 4);
                           // Загружаем изображение
                           let loader = new THREE.TextureLoader();
                           let texture = loader.load(`${imageFiles[i]}`, render);
@@ -250,9 +243,11 @@
                           // Поворачиваем плоскость
                           mesh1.rotation.x = -Math.PI / 2;
                           // Добавляем плоскость в контейнер
-                          let butterfly = butterflyObject.clone()
-                          butterfly.position.set(-1.9, -0.4, 0.475)
-                          mesh1.add(butterfly);
+                          if (i === 0 || i === 46 || i === 47 || i === 48 || i === 49 || i === 50 || i === 63) {
+                            let butterfly = butterflyObject.clone()
+                            butterfly.position.set(-2.35, -0.5, 0.475)
+                            mesh1.add(butterfly);
+                          }
                           markerRoots[i].add(mesh1);
                       }
                       break;
