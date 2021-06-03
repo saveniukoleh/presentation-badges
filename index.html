@@ -246,6 +246,10 @@
                           if (i === 0 || i === 46 || i === 47 || i === 48 || i === 49 || i === 50 || i === 63) {
                             let butterfly = butterflyObject.clone()
                             butterfly.position.set(-2.35, -0.5, 0.475)
+                            let newRot = butterfly.rotation.clone();
+                            newRot.z += Math.PI / 9;
+                            butterfly.setRotationFromEuler(newRot.clone())
+                            setTween(butterfly)
                             mesh1.add(butterfly);
                           }
                           markerRoots[i].add(mesh1);
@@ -325,8 +329,37 @@
 
           // Добавляем главный контейнер на сцену
           scene.add(mainContainer);
+        //   setTween()
             }
       }
+
+        function setTween(object) {
+            const easing = TWEEN.Easing.Sinusoidal.InOut;
+            const time = 2000;
+            const butterflyMod = Math.PI / 18;
+            const tween1 = new TWEEN.Tween({x: 0})
+                .to({x: 1}, time)
+                .easing(easing)
+                .onUpdate((alpha) => {
+                    object.rotation.z = butterflyMod - (butterflyMod * 2 * alpha.x)
+                })
+                .onComplete(() => {
+                    tween1.stop()
+
+                    const tween2 = new TWEEN.Tween({x: 0})
+                        .to({x: 1}, time)
+                        .easing(easing)
+                        .onUpdate((alpha) => {
+                            object.rotation.z = -butterflyMod + (butterflyMod * 2 * alpha.x)
+                        })
+                        .onComplete(() => {
+                            tween2.stop()
+                            setTween(object)
+                        })
+                        .start()
+                })
+                .start()
+        }
 
       function checkController() {
           if (controller) {
@@ -407,6 +440,7 @@
           totalTime += deltaTime;
           update();
           checkController();
+	        TWEEN.update(time)
           render();
       }
 
