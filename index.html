@@ -167,12 +167,20 @@
                 });
 
             function initScene() {
-            for (let i = 0; i< 64; i++) {
+                patternNames.push('');
+                patternBarcode.push(0);
+                modes.push('')
+                modelFiles.push('')
+                imageFiles.push('')
+                videoFiles.push('')
+                audioFiles.push('')
+                repeatOptions.push('false')
+            for (let i = 1; i< 64; i++) {
                 patternNames.push('');
                 patternBarcode.push(i);
                 i < 44 ? modes.push('image') : modes.push('')
                 modelFiles.push('')
-                i < 44 ? imageFiles.push(`badges/${i + 1}.jpg`) : imageFiles.push('')
+                i < 44 ? imageFiles.push(`badges/${i}.jpg`) : imageFiles.push('')
                 videoFiles.push('')
                 audioFiles.push('')
                 repeatOptions.push('false')
